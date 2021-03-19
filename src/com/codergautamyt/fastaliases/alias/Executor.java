@@ -5,16 +5,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class Executor implements CommandExecutor {
+public class Executor extends Command {
     String[] execute;
-    Executor(String[] execute) {
+    protected Executor(String name, String[] execute) {
+        super(name);
         this.execute = execute;
     }
+
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        for (String run : execute) {
-            Bukkit.dispatchCommand(commandSender, run);
+    public boolean execute(CommandSender sender, String command, String[] args) {
+        for(String execute1 : execute) {
+            Bukkit.getServer().dispatchCommand(sender, execute1);
         }
+
         return true;
     }
 }

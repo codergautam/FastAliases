@@ -1,15 +1,17 @@
 package com.codergautamyt.fastaliases.alias;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandMap;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Objects;
+import java.lang.reflect.Field;
 
 public class ConfigLoader {
-    JavaPlugin plugin = null;
-    FileConfiguration config = null;
+    JavaPlugin plugin;
+    FileConfiguration config;
     public ConfigLoader(JavaPlugin plugin, FileConfiguration config) {
         this.plugin = plugin;
         this.config = config;
@@ -22,7 +24,7 @@ try {
                 String[] aliases = new String[0];
                 try {
                     for (String subkey : config.getConfigurationSection("commands." + id).getKeys(false)) {
-                        if (subkey.equals("execute")) {
+                        if (subkey.equalsIgnoreCase("execute")) {
                             try {
                                 for (String execute1 : config.getConfigurationSection("commands." + id + ".execute").getKeys(false)) {
                                     execute = (String[]) ArrayUtils.add(execute, config.getString("commands." + id + ".execute." + execute1 + ".name"));
@@ -30,7 +32,7 @@ try {
                             } catch(NullPointerException e) {
                                 throw new ConfigException("Error at Alias #" + id + System.lineSeparator() + "You didn't specify the executor command!");
                             }
-                        } else if (subkey == "aliases") {
+                        } else if (subkey.equalsIgnoreCase("aliases")) {
                             try {
                                 for (String aliases1 : config.getConfigurationSection("commands." + id + ".aliases").getKeys(false)) {
                                     aliases = (String[]) ArrayUtils.add(aliases, config.getString("commands." + id + ".aliases." + aliases1 + ".name"));
@@ -42,12 +44,34 @@ try {
                             throw new ConfigException("Error at Alias #" + id + System.lineSeparator() + "Expected execute or aliases, got " + subkey);
                         }
                     }
+                    try {
+
+
+
                     for (String alias : aliases) {
-                        Objects.requireNonNull(plugin.getCommand(alias)).setExecutor(new Executor(execute));
-                        plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[FastAliases] Successfully loaded alias " + alias);
+
+                        try {
+                                Field commandMapField = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+                                commandMapField.setAccessible(true);
+                                CommandMap commandMap = (CommandMap) commandMapField.get(Bukkit.getServer());
+                                commandMap.register(alias, new Executor(alias, execute));
+                                plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[FastAliases] Successfully loaded alias " + alias);
+
+
+                        } catch(NullPointerException e) {
+                            e.printStackTrace();
+                            throw new ConfigException("UNEXPECTED ERROR CONTACT DEV");
+                        }
+                    }
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                        throw new ConfigException("UNEXPECTED ERROR CONTACT DEV");
                     }
                 }catch (NullPointerException e) {
+                    plugin.getServer().getConsoleSender().sendMessage("--------TECHNICAL INFO--------");
+                    e.printStackTrace();
                     throw new ConfigException("Error at Alias #" + id + System.lineSeparator() + "You didn't add 'execute' or 'aliases' after Alias id");
+
                 }
                 }
 
