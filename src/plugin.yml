@@ -1,0 +1,5 @@
+name: FastAliases
+description: Aliases plugin for spigot
+author: CoderGautamYT
+main: com.codergautamyt.fastaliases.FastAliases
+version: 1.0

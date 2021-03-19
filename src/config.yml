@@ -1,0 +1,18 @@
+# FastAliases - By CoderGautamYT
+
+# Example Alias Setup:
+
+# commands:
+#   1:
+#   execute:
+#     1:
+#       name: server hub
+#   aliases:
+#     1:
+#       name: hub
+#     2:
+#       name: lobby
+
+#Above example will execute /server hub when you type /hub or /lobby
+
+commands:
