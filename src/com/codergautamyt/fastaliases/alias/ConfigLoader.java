@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
 public class ConfigLoader {
     JavaPlugin plugin;
     FileConfiguration config;
+    AliasList aliasList = new AliasList();
     public ConfigLoader(JavaPlugin plugin, FileConfiguration config) {
         this.plugin = plugin;
         this.config = config;
@@ -54,7 +55,13 @@ try {
                                 Field commandMapField = Bukkit.getServer().getClass().getDeclaredField("commandMap");
                                 commandMapField.setAccessible(true);
                                 CommandMap commandMap = (CommandMap) commandMapField.get(Bukkit.getServer());
-                                commandMap.register(alias, new Executor(alias, execute));
+                                aliasList.setCommandMap(commandMap);
+
+                                Alias aliasObj = new Alias(alias, new Executor(alias, execute));
+
+                                commandMap.register(alias, aliasObj.cmd);
+                                aliasList.save(aliasObj);
+
                                 plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[FastAliases] Successfully loaded alias " + alias);
 
 
