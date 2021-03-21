@@ -10,6 +10,8 @@ public class CommandBase implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(args[0].equalsIgnoreCase("reload")) {
             new ReloadCommand().run(commandSender);
+        } if(args[0].equalsIgnoreCase("unregister")) {
+            new UnregisterCommand().run(commandSender);
         } else {
             commandSender.sendMessage(ChatColor.RED+"Subcommand not found!");
         }
