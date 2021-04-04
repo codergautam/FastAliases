@@ -61,7 +61,6 @@ try {
 
                                 commandMap.register(alias, aliasObj.cmd);
                                 aliasList.save(aliasObj);
-
                                 plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[FastAliases] Successfully loaded alias " + alias);
 
 

@@ -1,11 +1,16 @@
 package com.codergautamyt.fastaliases.alias;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.SimpleCommandMap;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 public class UnregisterAll {
+
     public static void UnregisterAllCommands() {
 
         if(AliasList.list != null) {
