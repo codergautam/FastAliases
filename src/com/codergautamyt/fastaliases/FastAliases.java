@@ -3,7 +3,6 @@ package com.codergautamyt.fastaliases;
 import com.codergautamyt.fastaliases.alias.ConfigException;
 import com.codergautamyt.fastaliases.alias.ConfigLoader;
 import com.codergautamyt.fastaliases.alias.PlayerCommandEvent;
-import com.codergautamyt.fastaliases.alias.PlayerCommandHandler;
 import com.codergautamyt.fastaliases.commands.CommandBase;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,7 +18,7 @@ public final class FastAliases extends JavaPlugin {
 
         ConfigLoader configLoader = new ConfigLoader(this, config);
 
-        getServer().getPluginManager().registerEvents(new PlayerCommandHandler(), this);
+       // getServer().getPluginManager().registerEvents(new PlayerCommandHandler(), this);
         getServer().getPluginManager().registerEvents(new PlayerCommandEvent(), this);
 
         try {

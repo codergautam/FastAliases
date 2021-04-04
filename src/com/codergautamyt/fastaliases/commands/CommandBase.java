@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 public class CommandBase implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+        /*å
         if(args[0].equalsIgnoreCase("reload")) {
             new ReloadCommand().run(commandSender);
         } if(args[0].equalsIgnoreCase("unregister")) {
@@ -15,6 +16,7 @@ public class CommandBase implements CommandExecutor {
         } else {
             commandSender.sendMessage(ChatColor.RED+"Subcommand not found!");
         }
-        return true;
+        return true; */
+        return false;
     }
 }
