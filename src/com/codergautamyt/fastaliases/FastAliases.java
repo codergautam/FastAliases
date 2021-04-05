@@ -14,6 +14,8 @@ public final class FastAliases extends JavaPlugin {
     @Override
     public void onEnable() {
         reloadConfig();
+        saveConfig();
+
         config = getConfig();
 
         ConfigLoader configLoader = new ConfigLoader(this, config);
