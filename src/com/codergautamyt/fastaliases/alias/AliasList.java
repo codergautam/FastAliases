@@ -17,11 +17,11 @@ public class AliasList {
     }
     public static void clear() {
         list = new ArrayList<Alias>();
-        Bukkit.getServer().getLogger().info( "cleared list");
+       // Bukkit.getServer().getLogger().info( "cleared list");
     }
     public void setCommandMap(CommandMap commandMap1) {
         commandMap = commandMap1;
-        Bukkit.getServer().getLogger().info( "commnad map set");
+       // Bukkit.getServer().getLogger().info( "commnad map set");
     }
     public static boolean contains(final Alias[] array, final String v) {
 

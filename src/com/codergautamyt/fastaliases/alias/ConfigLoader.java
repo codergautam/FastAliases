@@ -60,7 +60,7 @@ try {
                                 Alias aliasObj = new Alias(alias, new Executor(alias, execute));
 
                                 commandMap.register(alias, aliasObj.cmd);
-                                aliasList.save(aliasObj);
+                              //  aliasList.save(aliasObj);
                                 plugin.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[FastAliases] Successfully loaded alias " + alias);
 
 
